@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Class 12 D</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -20,90 +20,384 @@
       opacity: 0.7;
       font-weight: 500;
     }
+    .page {
+      display: none;
+    }
+    .page.active {
+      display: block;
+      animation: fadeIn 0.4s ease-in;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .nav-link {
+      transition: all 0.3s ease;
+    }
+    .nav-link.active {
+      color: #3b82f6;
+      font-weight: 600;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-  <!-- Header -->
-  <header class="bg-gradient-to-r from-blue-500 to-cyan-400 text-white text-center py-20 shadow-lg">
-    <h1 class="text-5xl font-bold mb-2">Class 12 D</h1>
-    <p class="text-xl opacity-90">Together we grow, learn, and shine ✨</p>
-  </header>
-
-  <!-- About Section -->
-  <section class="max-w-5xl mx-auto py-16 px-6">
-    <h2 class="text-3xl font-semibold text-center mb-6 relative">
-      About Our Class
-      <span class="block w-16 h-1 bg-blue-500 mx-auto mt-3 rounded-full"></span>
-    </h2>
-    <p class="text-center text-gray-600 leading-relaxed max-w-3xl mx-auto">
-      Welcome to <strong>Class 12 D</strong> — a vibrant community of passionate learners, 
-      dreamers, and achievers. This is our digital corner to capture memories, 
-      showcase achievements, and celebrate our journey together.
-    </p>
-  </section>
-
-  <!-- Gallery Section -->
-  <section class="bg-white py-16 shadow-inner">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-3xl font-semibold text-center mb-10 relative">
-        Class Photo Gallery
-        <span class="block w-16 h-1 bg-cyan-400 mx-auto mt-3 rounded-full"></span>
-      </h2>
-
-      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-        <!-- Photo placeholders -->
-        <div class="photo relative bg-gray-200 rounded-xl aspect-square hover:scale-105 transition-transform shadow-md"></div>
-        <div class="photo relative bg-gray-200 rounded-xl aspect-square hover:scale-105 transition-transform shadow-md"></div>
-        <div class="photo relative bg-gray-200 rounded-xl aspect-square hover:scale-105 transition-transform shadow-md"></div>
-        <div class="photo relative bg-gray-200 rounded-xl aspect-square hover:scale-105 transition-transform shadow-md"></div>
-        <div class="photo relative bg-gray-200 rounded-xl aspect-square hover:scale-105 transition-transform shadow-md"></div>
-        <div class="photo relative bg-gray-200 rounded-xl aspect-square hover:scale-105 transition-transform shadow-md"></div>
-        <div class="photo relative bg-gray-200 rounded-xl aspect-square hover:scale-105 transition-transform shadow-md"></div>
-        <div class="photo relative bg-gray-200 rounded-xl aspect-square hover:scale-105 transition-transform shadow-md"></div>
+  <!-- Navigation -->
+  <nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex justify-between items-center h-16">
+        <div class="flex items-center space-x-2">
+          <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center text-white font-bold">
+            12D
+          </div>
+          <span class="text-xl font-bold gradient-text">Class 12 D</span>
+        </div>
+        <div class="hidden md:flex space-x-8">
+          <a href="#" class="nav-link active" data-page="home">Home</a>
+          <a href="#" class="nav-link" data-page="gallery">Gallery</a>
+          <a href="#" class="nav-link" data-page="students">Students</a>
+          <a href="#" class="nav-link" data-page="achievements">Achievements</a>
+          <a href="#" class="nav-link" data-page="memories">Memories</a>
+          <a href="#" class="nav-link" data-page="contact">Contact</a>
+        </div>
+        <button class="md:hidden" id="menuBtn">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+      <!-- Mobile menu -->
+      <div id="mobileMenu" class="hidden md:hidden pb-4">
+        <a href="#" class="block py-2 nav-link active" data-page="home">Home</a>
+        <a href="#" class="block py-2 nav-link" data-page="gallery">Gallery</a>
+        <a href="#" class="block py-2 nav-link" data-page="students">Students</a>
+        <a href="#" class="block py-2 nav-link" data-page="achievements">Achievements</a>
+        <a href="#" class="block py-2 nav-link" data-page="memories">Memories</a>
+        <a href="#" class="block py-2 nav-link" data-page="contact">Contact</a>
       </div>
     </div>
-  </section>
+  </nav>
 
-  <!-- Events Section -->
-  <section class="max-w-6xl mx-auto py-16 px-6">
-    <h2 class="text-3xl font-semibold text-center mb-10 relative">
-      Memorable Events
-      <span class="block w-16 h-1 bg-blue-500 mx-auto mt-3 rounded-full"></span>
-    </h2>
-    <p class="text-center text-gray-600 mb-10 max-w-3xl mx-auto">
-      From school fests to farewell moments, here are snapshots of the times we’ll never forget.
-    </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      <div class="photo relative bg-gray-200 rounded-xl aspect-video hover:scale-105 transition-transform shadow-md"></div>
-      <div class="photo relative bg-gray-200 rounded-xl aspect-video hover:scale-105 transition-transform shadow-md"></div>
-      <div class="photo relative bg-gray-200 rounded-xl aspect-video hover:scale-105 transition-transform shadow-md"></div>
-    </div>
-  </section>
+  <!-- Home Page -->
+  <div id="home" class="page active">
+    <header class="bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-500 text-white text-center py-24 shadow-lg relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-20 left-20 w-64 h-64 bg-white rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-20 w-96 h-96 bg-cyan-300 rounded-full blur-3xl"></div>
+      </div>
+      <div class="relative z-10">
+        <h1 class="text-6xl font-bold mb-4 animate-pulse">Class 12 D</h1>
+        <p class="text-2xl opacity-90 mb-6">Together we grow, learn, and shine ✨</p>
+        <p class="text-lg opacity-80">Session 2024-2025</p>
+      </div>
+    </header>
 
-  <!-- Achievements Section -->
-  <section class="bg-gray-100 py-16">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-3xl font-semibold text-center mb-10 relative">
-        Achievements
-        <span class="block w-16 h-1 bg-cyan-500 mx-auto mt-3 rounded-full"></span>
-      </h2>
-      <p class="text-center text-gray-600 mb-10 max-w-3xl mx-auto">
-        We’re proud of our classmates who have excelled in academics, sports, and creative arts. Here’s to their hard work and success!
+    <section class="max-w-5xl mx-auto py-16 px-6">
+      <h2 class="text-4xl font-bold text-center mb-6 gradient-text">About Our Class</h2>
+      <div class="w-20 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto mb-10 rounded-full"></div>
+      <p class="text-center text-gray-600 leading-relaxed max-w-3xl mx-auto text-lg">
+        Welcome to <strong>Class 12 D</strong> — a vibrant community of passionate learners, 
+        dreamers, and achievers. This is our digital corner to capture memories, 
+        showcase achievements, and celebrate our journey together. We are 40+ bright minds 
+        ready to conquer the world! 🚀
       </p>
+    </section>
+
+    <section class="bg-white py-16">
+      <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-12">Quick Stats</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div class="text-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl card-hover">
+            <div class="text-4xl font-bold text-blue-600 mb-2">40+</div>
+            <div class="text-gray-600">Students</div>
+          </div>
+          <div class="text-center p-6 bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-xl card-hover">
+            <div class="text-4xl font-bold text-cyan-600 mb-2">25+</div>
+            <div class="text-gray-600">Achievements</div>
+          </div>
+          <div class="text-center p-6 bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl card-hover">
+            <div class="text-4xl font-bold text-purple-600 mb-2">100+</div>
+            <div class="text-gray-600">Memories</div>
+          </div>
+          <div class="text-center p-6 bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl card-hover">
+            <div class="text-4xl font-bold text-pink-600 mb-2">∞</div>
+            <div class="text-gray-600">Friendship</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Gallery Page -->
+  <div id="gallery" class="page">
+    <div class="bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-center py-16">
+      <h1 class="text-5xl font-bold mb-3">Photo Gallery</h1>
+      <p class="text-xl opacity-90">Capturing moments that last forever 📸</p>
+    </div>
+
+    <section class="max-w-6xl mx-auto py-16 px-6">
       <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
         <div class="photo relative bg-gray-200 rounded-xl aspect-square hover:scale-105 transition-transform shadow-md"></div>
         <div class="photo relative bg-gray-200 rounded-xl aspect-square hover:scale-105 transition-transform shadow-md"></div>
         <div class="photo relative bg-gray-200 rounded-xl aspect-square hover:scale-105 transition-transform shadow-md"></div>
         <div class="photo relative bg-gray-200 rounded-xl aspect-square hover:scale-105 transition-transform shadow-md"></div>
+        <div class="photo relative bg-gray-200 rounded-xl aspect-square hover:scale-105 transition-transform shadow-md"></div>
+        <div class="photo relative bg-gray-200 rounded-xl aspect-square hover:scale-105 transition-transform shadow-md"></div>
+        <div class="photo relative bg-gray-200 rounded-xl aspect-square hover:scale-105 transition-transform shadow-md"></div>
+        <div class="photo relative bg-gray-200 rounded-xl aspect-square hover:scale-105 transition-transform shadow-md"></div>
+        <div class="photo relative bg-gray-200 rounded-xl aspect-square hover:scale-105 transition-transform shadow-md"></div>
+        <div class="photo relative bg-gray-200 rounded-xl aspect-square hover:scale-105 transition-transform shadow-md"></div>
+        <div class="photo relative bg-gray-200 rounded-xl aspect-square hover:scale-105 transition-transform shadow-md"></div>
+        <div class="photo relative bg-gray-200 rounded-xl aspect-square hover:scale-105 transition-transform shadow-md"></div>
       </div>
+    </section>
+  </div>
+
+  <!-- Students Page -->
+  <div id="students" class="page">
+    <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white text-center py-16">
+      <h1 class="text-5xl font-bold mb-3">Our Amazing Students</h1>
+      <p class="text-xl opacity-90">The stars of Class 12 D ⭐</p>
     </div>
-  </section>
+
+    <section class="max-w-6xl mx-auto py-16 px-6">
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+        <div class="bg-white rounded-xl p-4 shadow-md card-hover text-center">
+          <div class="w-24 h-24 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full mx-auto mb-3"></div>
+          <h3 class="font-semibold text-gray-800">Student Name</h3>
+          <p class="text-sm text-gray-500">Roll No. 1</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-md card-hover text-center">
+          <div class="w-24 h-24 bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-full mx-auto mb-3"></div>
+          <h3 class="font-semibold text-gray-800">Student Name</h3>
+          <p class="text-sm text-gray-500">Roll No. 2</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-md card-hover text-center">
+          <div class="w-24 h-24 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full mx-auto mb-3"></div>
+          <h3 class="font-semibold text-gray-800">Student Name</h3>
+          <p class="text-sm text-gray-500">Roll No. 3</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-md card-hover text-center">
+          <div class="w-24 h-24 bg-gradient-to-br from-pink-400 to-pink-600 rounded-full mx-auto mb-3"></div>
+          <h3 class="font-semibold text-gray-800">Student Name</h3>
+          <p class="text-sm text-gray-500">Roll No. 4</p>
+        </div>
+        <div class="bg-white rounded-xl p-4 shadow-md card-hover text-center">
+          <div class="w-24 h-24 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full mx-auto mb-3"></div>
+          <h3 class="font-semibold text-gray-800">Student Name</h3>
+          <p class="text-sm text-gray-500">Roll No. 5</p>
+        </div>
+      </div>
+      <p class="text-center text-gray-500 mt-10">+ 35 more amazing classmates!</p>
+    </section>
+  </div>
+
+  <!-- Achievements Page -->
+  <div id="achievements" class="page">
+    <div class="bg-gradient-to-r from-yellow-500 to-orange-500 text-white text-center py-16">
+      <h1 class="text-5xl font-bold mb-3">Our Achievements</h1>
+      <p class="text-xl opacity-90">Excellence in every field 🏆</p>
+    </div>
+
+    <section class="max-w-6xl mx-auto py-16 px-6">
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-white text-2xl mr-4">🏅</div>
+            <div>
+              <h3 class="font-bold text-xl">Academic Excellence</h3>
+              <p class="text-gray-500 text-sm">Top performers in board exams</p>
+            </div>
+          </div>
+          <p class="text-gray-600">Our class secured 5 positions in the school's top 10 rankings with outstanding scores in Science and Mathematics streams.</p>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white text-2xl mr-4">⚽</div>
+            <div>
+              <h3 class="font-bold text-xl">Sports Champions</h3>
+              <p class="text-gray-500 text-sm">Winners of inter-school tournaments</p>
+            </div>
+          </div>
+          <p class="text-gray-600">Our athletes brought home 8 medals from various competitions including basketball, athletics, and cricket tournaments.</p>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-white text-2xl mr-4">🎨</div>
+            <div>
+              <h3 class="font-bold text-xl">Creative Arts</h3>
+              <p class="text-gray-500 text-sm">Recognition in cultural events</p>
+            </div>
+          </div>
+          <p class="text-gray-600">Won first place in the annual talent show with our dance performance and secured top 3 in the art exhibition.</p>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 shadow-lg card-hover">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white text-2xl mr-4">💻</div>
+            <div>
+              <h3 class="font-bold text-xl">Tech Innovation</h3>
+              <p class="text-gray-500 text-sm">Coding competitions and hackathons</p>
+            </div>
+          </div>
+          <p class="text-gray-600">Our tech team won 2nd place in the regional coding olympiad and created an award-winning app for the science fair.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Memories Page -->
+  <div id="memories" class="page">
+    <div class="bg-gradient-to-r from-pink-500 to-rose-500 text-white text-center py-16">
+      <h1 class="text-5xl font-bold mb-3">Unforgettable Memories</h1>
+      <p class="text-xl opacity-90">Moments that define us 💝</p>
+    </div>
+
+    <section class="max-w-6xl mx-auto py-16 px-6">
+      <div class="space-y-12">
+        <div class="bg-white rounded-xl p-8 shadow-lg">
+          <h3 class="text-2xl font-bold mb-4 text-blue-600">Annual Day 2024</h3>
+          <div class="grid md:grid-cols-3 gap-4 mb-4">
+            <div class="photo relative bg-gray-200 rounded-lg aspect-video"></div>
+            <div class="photo relative bg-gray-200 rounded-lg aspect-video"></div>
+            <div class="photo relative bg-gray-200 rounded-lg aspect-video"></div>
+          </div>
+          <p class="text-gray-600">An incredible evening filled with performances, laughter, and celebration. Our class play was the highlight of the event!</p>
+        </div>
+
+        <div class="bg-white rounded-xl p-8 shadow-lg">
+          <h3 class="text-2xl font-bold mb-4 text-purple-600">Educational Trip</h3>
+          <div class="grid md:grid-cols-3 gap-4 mb-4">
+            <div class="photo relative bg-gray-200 rounded-lg aspect-video"></div>
+            <div class="photo relative bg-gray-200 rounded-lg aspect-video"></div>
+            <div class="photo relative bg-gray-200 rounded-lg aspect-video"></div>
+          </div>
+          <p class="text-gray-600">Three days of adventure, bonding, and learning outside the classroom. From historical sites to team-building activities!</p>
+        </div>
+
+        <div class="bg-white rounded-xl p-8 shadow-lg">
+          <h3 class="text-2xl font-bold mb-4 text-green-600">Farewell Celebration</h3>
+          <div class="grid md:grid-cols-3 gap-4 mb-4">
+            <div class="photo relative bg-gray-200 rounded-lg aspect-video"></div>
+            <div class="photo relative bg-gray-200 rounded-lg aspect-video"></div>
+            <div class="photo relative bg-gray-200 rounded-lg aspect-video"></div>
+          </div>
+          <p class="text-gray-600">A bittersweet evening honoring our seniors and celebrating the bonds we've formed. Tears, laughter, and promises to stay connected!</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Contact Page -->
+  <div id="contact" class="page">
+    <div class="bg-gradient-to-r from-indigo-500 to-purple-500 text-white text-center py-16">
+      <h1 class="text-5xl font-bold mb-3">Get In Touch</h1>
+      <p class="text-xl opacity-90">We'd love to hear from you! 📧</p>
+    </div>
+
+    <section class="max-w-4xl mx-auto py-16 px-6">
+      <div class="bg-white rounded-xl shadow-lg p-8">
+        <h2 class="text-2xl font-bold mb-6 text-center">Send Us a Message</h2>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-gray-700 font-semibold mb-2">Name</label>
+            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your name">
+          </div>
+          <div>
+            <label class="block text-gray-700 font-semibold mb-2">Email</label>
+            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="your.email@example.com">
+          </div>
+          <div>
+            <label class="block text-gray-700 font-semibold mb-2">Message</label>
+            <textarea rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your message here..."></textarea>
+          </div>
+          <button class="w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-bold py-3 rounded-lg hover:shadow-lg transition-all">
+            Send Message
+          </button>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 mt-12">
+        <div class="text-center p-6 bg-blue-50 rounded-xl">
+          <div class="text-3xl mb-3">📍</div>
+          <h3 class="font-bold mb-2">Location</h3>
+          <p class="text-gray-600 text-sm">Your School Name<br>City, State</p>
+        </div>
+        <div class="text-center p-6 bg-cyan-50 rounded-xl">
+          <div class="text-3xl mb-3">📞</div>
+          <h3 class="font-bold mb-2">Phone</h3>
+          <p class="text-gray-600 text-sm">+91 XXXXX XXXXX</p>
+        </div>
+        <div class="text-center p-6 bg-purple-50 rounded-xl">
+          <div class="text-3xl mb-3">✉️</div>
+          <h3 class="font-bold mb-2">Email</h3>
+          <p class="text-gray-600 text-sm">class12d@school.edu</p>
+        </div>
+      </div>
+    </section>
+  </div>
 
   <!-- Footer -->
-  <footer class="bg-gray-900 text-gray-300 text-center py-6 mt-10">
-    <p>© 2025 Class 12 D | Made with ❤️ and teamwork</p>
+  <footer class="bg-gray-900 text-gray-300 text-center py-8 mt-16">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex justify-center space-x-6 mb-4">
+        <a href="#" class="hover:text-blue-400 transition-colors">Instagram</a>
+        <a href="#" class="hover:text-blue-400 transition-colors">Facebook</a>
+        <a href="#" class="hover:text-blue-400 transition-colors">Twitter</a>
+      </div>
+      <p class="mb-2">© 2025 Class 12 D | Made with ❤️ and teamwork</p>
+      <p class="text-sm text-gray-500">Session 2024-2025</p>
+    </div>
   </footer>
+
+  <script>
+    // Navigation functionality
+    const navLinks = document.querySelectorAll('.nav-link');
+    const pages = document.querySelectorAll('.page');
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetPage = link.getAttribute('data-page');
+        
+        // Update active states
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        
+        // Show target page
+        pages.forEach(page => page.classList.remove('active'));
+        document.getElementById(targetPage).classList.add('active');
+        
+        // Close mobile menu
+        mobileMenu.classList.add('hidden');
+        
+        // Scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    // Mobile menu toggle
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+  </script>
 
 </body>
 </html>
